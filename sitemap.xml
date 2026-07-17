@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://veaf.github.io/CTLD_plugins/</loc>
+        <lastmod>2026-07-17</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/fr/"/>
+    </url>
+    <url>
+        <loc>https://veaf.github.io/CTLD_plugins/plugins/metal-farp/</loc>
+        <lastmod>2026-07-17</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/plugins/metal-farp/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/fr/plugins/metal-farp/"/>
+    </url>
+    <url>
+        <loc>https://veaf.github.io/CTLD_plugins/plugins/template/</loc>
+        <lastmod>2026-07-17</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/plugins/template/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/fr/plugins/template/"/>
+    </url>
+    <url>
+        <loc>https://veaf.github.io/CTLD_plugins/fr/</loc>
+        <lastmod>2026-07-17</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/fr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/"/>
+    </url>
+    <url>
+        <loc>https://veaf.github.io/CTLD_plugins/fr/plugins/metal-farp/</loc>
+        <lastmod>2026-07-17</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/fr/plugins/metal-farp/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/plugins/metal-farp/"/>
+    </url>
+    <url>
+        <loc>https://veaf.github.io/CTLD_plugins/fr/plugins/template/</loc>
+        <lastmod>2026-07-17</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/fr/plugins/template/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/plugins/template/"/>
+    </url>
+</urlset>
