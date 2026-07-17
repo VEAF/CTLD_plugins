@@ -23,15 +23,33 @@ local PLUGIN_SCENES = {
     "plugins/_template/src/CTLD_templateScene.lua",
 }
 
+-- STATIC → desc.type; GROUND → desc.units[i].unitType(coalitionId) (a per-coalition function),
+-- with a static desc.units[i].type fallback. Kept self-contained so this gate stays copyable;
+-- CTLD ships the same logic as CTLDTypeCollector.typesOfDescriptor.
 local function spawnedTypesOf(desc)
-    local out = {}
+    local out, seen = {}, {}
     if type(desc) ~= "table" then return out end
-    if desc.groupType == "GROUND" and type(desc.units) == "table" then
-        for _, u in ipairs(desc.units) do
-            if type(u) == "table" and u.type then out[#out + 1] = u.type end
+    local function push(tn)
+        if type(tn) == "string" and tn ~= "" and not seen[tn] then
+            seen[tn] = true
+            out[#out + 1] = tn
         end
-    elseif desc.type then
-        out[#out + 1] = desc.type
+    end
+    if desc.groupType == "STATIC" then
+        push(desc.type)
+    elseif desc.groupType == "GROUND" and type(desc.units) == "table" then
+        for _, u in ipairs(desc.units) do
+            if type(u) == "table" then
+                if type(u.unitType) == "function" then
+                    for _, cid in ipairs({ 1, 2 }) do
+                        local ok, tn = pcall(u.unitType, cid)
+                        if ok then push(tn) end
+                    end
+                else
+                    push(u.type)
+                end
+            end
+        end
     end
     return out
 end
