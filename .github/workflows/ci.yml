@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, master]
+  pull_request:
+    branches: [develop, master]
+  workflow_dispatch:
+
+jobs:
+  # Lua 5.1 syntax check for plugin + test sources (DCS runs Lua 5.1).
+  lua-lint:
+    name: Lua 5.1 Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua 5.1
+        run: sudo apt-get update && sudo apt-get install -y lua5.1
+      - name: Syntax-check plugins/ and tests/ with luac5.1
+        run: |
+          failed=0; total=0
+          while IFS= read -r -d '' f; do
+            total=$((total + 1))
+            if ! luac5.1 -p "$f" 2>/tmp/luac_err; then
+              echo "::error file=$f::$(cat /tmp/luac_err)"
+              failed=$((failed + 1))
+            fi
+          done < <(find plugins tests -name "*.lua" -not -path 'tests/data/*' -print0)
+          if [ "$failed" -gt 0 ]; then
+            echo "::error::$failed / $total Lua file(s) failed Lua 5.1 syntax check."
+            exit 1
+          fi
+          echo "Lua 5.1 syntax OK — $total file(s) checked."
+
+  # Static analysis for plugin sources.
+  luacheck:
+    name: luacheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua + LuaRocks + luacheck
+        run: |
+          sudo apt-get update && sudo apt-get install -y lua5.1 liblua5.1-dev luarocks
+          sudo luarocks install luacheck
+      - name: Run luacheck
+        run: luacheck --config .luacheckrc plugins/ tests/
+
+  # Design-time asset hard-gate (+ any plugin tests) against the vendored CTLD runtime.
+  busted:
+    name: busted Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua + LuaRocks + busted
+        run: |
+          sudo apt-get update && sudo apt-get install -y lua5.1 liblua5.1-dev luarocks
+          sudo luarocks install busted
+      - name: Run busted
+        run: busted tests/
+
+  # Build every plugin into dist/<plugin>.lua and upload as artifacts.
+  build:
+    name: Build plugins
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build all plugins
+        run: powershell -ExecutionPolicy Bypass -File tools\build\merge_plugin.ps1 -All
+        shell: pwsh
+      - name: Verify dist output
+        run: |
+          $files = Get-ChildItem dist -Filter *.lua -ErrorAction SilentlyContinue
+          if (-not $files) { Write-Host "::error::no plugin .lua produced in dist/"; exit 1 }
+          foreach ($f in $files) {
+            if ($f.Length -eq 0) { Write-Host "::error::$($f.Name) is empty"; exit 1 }
+          }
+          Write-Host "Built $($files.Count) plugin(s)."
+        shell: pwsh
+      - name: Upload built plugins
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugins
+          path: dist/*.lua
+          retention-days: 7

@@ -1,0 +1,13 @@
+# Build artifacts — plugin .lua files are built by CI and attached to releases.
+dist/
+
+# Editor / OS
+*.iml
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Lua / test
+luacov.*.out
+*.tmp

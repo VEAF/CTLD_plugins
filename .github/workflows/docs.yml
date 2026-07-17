@@ -1,0 +1,29 @@
+name: Docs
+
+on:
+  push:
+    branches: [develop]
+    paths: ['docs/**', 'mkdocs.yml', '.github/workflows/docs.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-deploy:
+    name: Build & deploy catalogue
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install mkdocs-material + i18n
+        run: pip install mkdocs-material mkdocs-static-i18n
+      - name: Build
+        run: mkdocs build --strict
+      - name: Deploy to gh-pages
+        if: github.ref == 'refs/heads/develop'
+        run: mkdocs gh-deploy --force

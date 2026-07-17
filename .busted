@@ -1,0 +1,10 @@
+return {
+  default = {
+    verbose  = true,
+    coverage = false,
+    -- Discover *_spec.lua recursively under tests/
+    pattern  = "_spec",
+    -- Helper loaded before every spec: DCS stubs + vendored CTLD runtime
+    helper   = "tests/helpers/init.lua",
+  },
+}

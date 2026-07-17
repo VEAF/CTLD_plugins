@@ -1,0 +1,11 @@
+# ── Line endings ─────────────────────────────────────────────
+* text=auto
+
+# Shell scripts must stay LF even on Windows checkouts (CRLF breaks `sh`).
+*.sh text eol=lf
+
+# ── Export-ignore: dev-only dirs excluded from git archive ──
+tools/      export-ignore
+tests/      export-ignore
+vendor/     export-ignore
+.github/    export-ignore
