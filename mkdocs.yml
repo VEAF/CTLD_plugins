@@ -51,3 +51,5 @@ nav:
   - Home: index.md
   - Plugins:
     - Metal FARP: plugins/metal-farp.md
+  - For authors:
+    - Template: plugins/template.md
