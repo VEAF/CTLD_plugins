@@ -11,9 +11,13 @@ self            = false
 
 exclude_files = {
     "tools/**",
-    "vendor/**",        -- vendored CTLD.lua build (not ours to lint)
-    "tests/data/**",    -- generated datamine type set
+    "vendor/**",                    -- vendored CTLD.lua build (not ours to lint)
+    "tests/data/**",                -- generated datamine type set
+    "tests/helpers/dcs_stubs.lua",  -- vendored DCS API stubs (defines the DCS globals)
 }
+
+-- `ctld` is writable: plugin scenes populate ctld.i18n[...] at load.
+globals = { "ctld" }
 
 read_globals = {
     -- DCS World API
@@ -23,7 +27,6 @@ read_globals = {
     "Weapon", "Runway", "Warehouse",
     "require", "dofile", "loadfile", "loadstring", "io", "os",
     -- CTLD runtime (provided by CTLD, consumed by plugins)
-    "ctld",
     "CTLDObjectRegistry", "CTLDSceneManager", "CtldScene",
     "CTLDCrateManager", "CTLDCrateAssemblyManager",
     "CTLDPlayerManager", "CTLDPlayer",
@@ -33,7 +36,9 @@ read_globals = {
 }
 
 files["tests/"] = {
+    -- busted globals + the CTLD singletons a test may spy on (mutate).
     globals = { "describe", "it", "setup", "teardown",
                 "before_each", "after_each",
-                "assert", "spy", "mock", "stub" },
+                "assert", "spy", "mock", "stub",
+                "CTLDObjectRegistry", "CTLDSceneManager" },
 }

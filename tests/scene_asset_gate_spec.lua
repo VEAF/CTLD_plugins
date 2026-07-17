@@ -20,6 +20,7 @@ local ROOT = debug.getinfo(1, "S").source:match("^@(.+)tests[\\/][^\\/]+_spec%.l
 
 local PLUGIN_SCENES = {
     "plugins/metal-farp/src/CTLD_metalFarpScene.lua",
+    "plugins/_template/src/CTLD_templateScene.lua",
 }
 
 local function spawnedTypesOf(desc)
