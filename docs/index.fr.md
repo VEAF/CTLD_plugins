@@ -16,6 +16,6 @@ mission ne les embarque que si elle le décide.
 
 ## Plugins disponibles
 
-| Plugin | Ce qu'il construit | Requiert |
-|--------|--------------------|----------|
-| [Metal FARP](plugins/metal-farp.md) | Un FARP à hélisurface métallique | Mod DCS `Farp_FG_Petit_Helipad` |
+| Plugin | Ce qu'il construit | Requiert | Télécharger |
+|--------|--------------------|----------|-------------|
+| [Metal FARP](plugins/metal-farp.md) | Un FARP à hélisurface métallique | Mod DCS `FG_small_Helipad` | [⬇ metal-farp.lua](https://raw.githubusercontent.com/VEAF/CTLD_plugins/master/plugins/metal-farp/src/CTLD_metalFarpScene.lua){ .md-button } |

@@ -1,14 +1,14 @@
 ---@diagnostic disable
 -- CTLD_metalFarpScene.lua
 -- Metal FARP deployment scene — compact forward arming/refueling point using the
--- Farp_FG_Petit_Helipad mod (visible metallic helipad platform).
+-- FG_small_Helipad mod (visible metallic helipad platform).
 --
--- Requires the Farp_FG_Petit_Helipad mod to be installed on all clients.
+-- Requires the FG_small_Helipad mod to be installed on all clients.
 -- probeSkip=true is set on the registry entry — the mod cannot be validated at runtime
 -- (DCS getDesc().life == 0 whether the mod is installed or not).
 --
 -- Layout (all offsets from trigger unit position):
---   Farp_FG_Petit_Helipad heliport — 58 m ahead of trigger unit
+--   FG_small_Helipad heliport — 58 m ahead of trigger unit
 --   Fuel truck              — 35 m / 8°   heading 90° (t+5 s)
 --   Repair truck            — 35 m / 11°  heading 90° (t+5 s)
 --   Tent                    — 35 m / 10°  heading 90° (t+5.5 s)
@@ -24,32 +24,32 @@
 -- BLOCK 1 : i18n -- 4 mandatory languages
 -- ====================================================================================================
 
-ctld.i18n["en"]["Metal FARP Crate"]                                        = "Metal FARP Crate"
-ctld.i18n["fr"]["Metal FARP Crate"]                                        = "Caisse FARP Métal"
-ctld.i18n["es"]["Metal FARP Crate"]                                        = "Caja FARP Metal"
-ctld.i18n["ko"]["Metal FARP Crate"]                                        = "메탈 FARP 화물"
+ctld.i18n["en"]["Metal FARP Crate"]                                = "Metal FARP Crate"
+ctld.i18n["fr"]["Metal FARP Crate"]                                = "Caisse FARP Métal"
+ctld.i18n["es"]["Metal FARP Crate"]                                = "Caja FARP Metal"
+ctld.i18n["ko"]["Metal FARP Crate"]                                = "메탈 FARP 화물"
 
-ctld.i18n["en"]["Deploy Metal FARP"]                                       = "Deploy Metal FARP"
-ctld.i18n["fr"]["Deploy Metal FARP"]                                       = "Déployer FARP Métal"
-ctld.i18n["es"]["Deploy Metal FARP"]                                       = "Desplegar FARP Metal"
-ctld.i18n["ko"]["Deploy Metal FARP"]                                       = "메탈 FARP 배치"
+ctld.i18n["en"]["Deploy Metal FARP"]                               = "Deploy Metal FARP"
+ctld.i18n["fr"]["Deploy Metal FARP"]                               = "Déployer FARP Métal"
+ctld.i18n["es"]["Deploy Metal FARP"]                               = "Desplegar FARP Metal"
+ctld.i18n["ko"]["Deploy Metal FARP"]                               = "메탈 FARP 배치"
 
-ctld.i18n["en"]["--- Metal FARP Deployment by %1 : Complete! ---"]        = "--- Metal FARP Deployment by %1 : Complete! ---"
-ctld.i18n["fr"]["--- Metal FARP Deployment by %1 : Complete! ---"]        = "--- Déploiement FARP Métal par %1 : Terminé ! ---"
-ctld.i18n["es"]["--- Metal FARP Deployment by %1 : Complete! ---"]        = "--- Despliegue FARP Metal por %1 : ¡Completo! ---"
-ctld.i18n["ko"]["--- Metal FARP Deployment by %1 : Complete! ---"]        = "--- %1에 의한 메탈 FARP 배치 완료! ---"
+ctld.i18n["en"]["--- Metal FARP Deployment by %1 : Complete! ---"] = "--- Metal FARP Deployment by %1 : Complete! ---"
+ctld.i18n["fr"]["--- Metal FARP Deployment by %1 : Complete! ---"] = "--- Déploiement FARP Métal par %1 : Terminé ! ---"
+ctld.i18n["es"]["--- Metal FARP Deployment by %1 : Complete! ---"] = "--- Despliegue FARP Metal por %1 : ¡Completo! ---"
+ctld.i18n["ko"]["--- Metal FARP Deployment by %1 : Complete! ---"] = "--- %1에 의한 메탈 FARP 배치 완료! ---"
 
 -- ====================================================================================================
 -- BLOCK 2 : Registry entries required by this scene.
 -- registerIfAbsent() is a no-op when the key already exists.
 -- ====================================================================================================
 
-CTLDObjectRegistry.registerIfAbsent("Farp_FG_Petit_Helipad", {
+CTLDObjectRegistry.registerIfAbsent("FG_small_Helipad", {
     groupType            = "STATIC",
     namePrefix           = "FARP_Helipad",
-    type                 = "Farp_FG_Petit_Helipad",
+    type                 = "FG_small_Helipad",
     category             = "Heliports",
-    shape_name           = "Farp_FG_Petit_Helipad.edm",
+    shape_name           = "FG_small_Helipad.edm",
     heliport_frequency   = "127.5",
     heliport_callsign_id = 1,
     heliport_modulation  = 0,
@@ -63,14 +63,16 @@ CTLDObjectRegistry.registerIfAbsent("Fuel_Truck", {
     namePrefix = "Fuel_Truck_Grp",
     task       = "Ground Nothing",
     category   = Unit.Category.GROUND_UNIT,
-    units = {
+    units      = {
         {
-            namePrefix     = "Fuel_Truck_Unit",
-            unitType       = function(cid)
+            namePrefix = "Fuel_Truck_Unit",
+            unitType = function(cid)
                 return cid == coalition.side.RED and "ATZ-10" or "M978 HEMTT Tanker"
             end,
             playerCanDrive = false,
-            dx = 0, dz = 0, dh = 0,
+            dx = 0,
+            dz = 0,
+            dh = 0,
         },
     },
 })
@@ -80,14 +82,16 @@ CTLDObjectRegistry.registerIfAbsent("repare_Truck", {
     namePrefix = "repare_Truck_Grp",
     task       = "Ground Nothing",
     category   = Unit.Category.GROUND_UNIT,
-    units = {
+    units      = {
         {
-            namePrefix     = "repare_Truck_Unit",
-            unitType       = function(cid)
+            namePrefix = "repare_Truck_Unit",
+            unitType = function(cid)
                 return cid == coalition.side.RED and "Ural-375" or "M 818"
             end,
             playerCanDrive = false,
-            dx = 0, dz = 0, dh = 0,
+            dx = 0,
+            dz = 0,
+            dh = 0,
         },
     },
 })
@@ -132,17 +136,17 @@ CTLDObjectRegistry.registerIfAbsent("Windsock", {
 -- BLOCK 3 : scene model + crate descriptor
 -- ====================================================================================================
 
-local metalFarpScene = {}
-metalFarpScene.name       = "Metal FARP"
-metalFarpScene.requiresMod = "Farp_FG_Petit_Helipad"  -- human-readable required-mod label (docs/catalogue)
+local metalFarpScene        = {}
+metalFarpScene.name         = "Metal FARP"
+metalFarpScene.requiresMod  = "FG_small_Helipad" -- human-readable required-mod label (docs/catalogue)
 -- Non-stock (mod) DCS types this scene spawns. Added to the known set by the design-time
 -- asset hard-gate (datamine ∪ modTypes) so validation still catches typos in every stock type.
-metalFarpScene.modTypes   = { "Farp_FG_Petit_Helipad" }
+metalFarpScene.modTypes     = { "FG_small_Helipad" }
 -- Minimum CTLD version providing the plugin-scene machinery (load-position-independent menus,
 -- requiresCtld check). CTLD warns at load if it is older.
 metalFarpScene.requiresCtld = "2.0.0"
 
-metalFarpScene.crate = {
+metalFarpScene.crate        = {
     weight         = 1001.26,
     i18nKey        = "Metal FARP Crate",
     deployKey      = "Deploy Metal FARP",
@@ -152,10 +156,10 @@ metalFarpScene.crate = {
     showSets       = false,
 }
 
-metalFarpScene.steps = {
+metalFarpScene.steps        = {
 
     -- ----------------------------------------------------------------
-    -- Step 1: Farp_FG_Petit_Helipad heliport (delay=0).
+    -- Step 1: FG_small_Helipad heliport (delay=0).
     -- Spawned 50 m ahead of the trigger unit to avoid overlapping it.
     -- Saves the spawned airbase name for the warehouse-stocking step.
     -- critical=true: if the mod is absent the helipad cannot spawn; abort the whole scene
@@ -166,9 +170,9 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 0,
         relativeHeadingInDegrees = 0,
         relativeAltitudeInMeters = 0,
-        registryKey = "Farp_FG_Petit_Helipad",
-        critical    = true,
-        func = function(ctx)
+        registryKey              = "FG_small_Helipad",
+        critical                 = true,
+        func                     = function(ctx)
             if not ctx.spawnedObj then return false end
             ctx.scene._params.farpName = ctx.spawnedObj:getName()
             return true
@@ -183,7 +187,7 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 5,
         relativeHeadingInDegrees = 90,
         relativeAltitudeInMeters = 0,
-        registryKey = "Fuel_Truck",
+        registryKey              = "Fuel_Truck",
     },
 
     -- ----------------------------------------------------------------
@@ -194,7 +198,7 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 0,
         relativeHeadingInDegrees = 90,
         relativeAltitudeInMeters = 0,
-        registryKey = "repare_Truck",
+        registryKey              = "repare_Truck",
     },
 
     -- ----------------------------------------------------------------
@@ -205,7 +209,7 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 0.5,
         relativeHeadingInDegrees = 90,
         relativeAltitudeInMeters = 0,
-        registryKey = "FARP_Tent",
+        registryKey              = "FARP_Tent",
     },
 
     -- ----------------------------------------------------------------
@@ -216,7 +220,7 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 4.5,
         relativeHeadingInDegrees = 0,
         relativeAltitudeInMeters = 0,
-        registryKey = "ammo_cargo",
+        registryKey              = "ammo_cargo",
     },
 
     -- ----------------------------------------------------------------
@@ -227,7 +231,7 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 5,
         relativeHeadingInDegrees = 310,
         relativeAltitudeInMeters = 4,
-        registryKey = "NF-2_LightOn",
+        registryKey              = "NF-2_LightOn",
     },
 
     -- ----------------------------------------------------------------
@@ -238,7 +242,7 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 0,
         relativeHeadingInDegrees = 220,
         relativeAltitudeInMeters = 0,
-        registryKey = "Windsock",
+        registryKey              = "Windsock",
     },
 
     -- ----------------------------------------------------------------
@@ -249,7 +253,7 @@ metalFarpScene.steps = {
         delayAfterPreviousStep   = 0,
         relativeHeadingInDegrees = 90,
         relativeAltitudeInMeters = 0,
-        registryKey = "us carrier shooter",
+        registryKey              = "us carrier shooter",
     },
 
     -- ----------------------------------------------------------------
@@ -266,16 +270,16 @@ metalFarpScene.steps = {
                     local w = ab:getWarehouse()
                     -- If this is a redeployed FARP, restore the snapshot; otherwise stock defaults.
                     local snap = ctx.scene._params.repackData
-                              and ctx.scene._params.repackData.warehouseSnapshot
+                        and ctx.scene._params.repackData.warehouseSnapshot
                     if snap and snap.liquid then
                         for fuelType = 0, 3 do
                             w:setLiquidAmount(fuelType, snap.liquid[fuelType] or 0)
                         end
                     else
-                        w:addLiquid(0, 10000)   -- jet fuel
-                        w:addLiquid(1, 10000)   -- aviation gasoline
-                        w:addLiquid(2, 10000)   -- MW50
-                        w:addLiquid(3, 10000)   -- diesel
+                        w:addLiquid(0, 10000) -- jet fuel
+                        w:addLiquid(1, 10000) -- aviation gasoline
+                        w:addLiquid(2, 10000) -- MW50
+                        w:addLiquid(3, 10000) -- diesel
                     end
                 end
             end
@@ -291,7 +295,7 @@ metalFarpScene.steps = {
 -- Captures the current warehouse fuel levels so they can be restored on next deployment.
 -- ====================================================================================================
 
-metalFarpScene.onRepack = function(scene, repackData)
+metalFarpScene.onRepack     = function(scene, repackData)
     local farpName = scene._params and scene._params.farpName
     if not farpName then return end
     local ab = Airbase.getByName(farpName)
@@ -299,10 +303,10 @@ metalFarpScene.onRepack = function(scene, repackData)
     local w = ab:getWarehouse()
     repackData.warehouseSnapshot = {
         liquid = {
-            [0] = w:getLiquidAmount(0),   -- jet fuel
-            [1] = w:getLiquidAmount(1),   -- aviation gasoline
-            [2] = w:getLiquidAmount(2),   -- MW50
-            [3] = w:getLiquidAmount(3),   -- diesel
+            [0] = w:getLiquidAmount(0), -- jet fuel
+            [1] = w:getLiquidAmount(1), -- aviation gasoline
+            [2] = w:getLiquidAmount(2), -- MW50
+            [3] = w:getLiquidAmount(3), -- diesel
         }
     }
 end

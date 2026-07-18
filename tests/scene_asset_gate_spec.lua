@@ -130,7 +130,7 @@ describe("plugin scene asset hard-gate", function()
     end)
 
     it("metalFarp's mod type is declared via modTypes", function()
-        assert.is_true(modUnion["Farp_FG_Petit_Helipad"] == true)
+        assert.is_true(modUnion["FG_small_Helipad"] == true)
     end)
 
 end)
