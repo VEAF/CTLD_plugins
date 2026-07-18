@@ -7,6 +7,14 @@ Le site MkDocs Material est géré par **mike**, avec deux versions coexistant s
 - **Un seul site (master uniquement)** : impossible de tester la doc et les liens download en recette sans bricolage — le testeur aurait cliqué "télécharger" et obtenu la version stable, pas celle en cours de test.
 - **Deux sites séparés (`/` et `/dev/`)** : fonctionne mais perd le sélecteur de version intégré, déjà validé dans l'orga VEAF (`veaf.github.io/documentation/`).
 
+## URLs du site
+
+| Version | URL | Déclencheur |
+|---------|-----|-------------|
+| Production (`latest`) | <https://veaf.github.io/CTLD_plugins/latest/> | push `master` |
+| Recette (`dev`) | <https://veaf.github.io/CTLD_plugins/dev/> | push `develop` |
+| Racine | <https://veaf.github.io/CTLD_plugins/> | redirige vers `latest` |
+
 ## Conséquences
 
 - Le workflow `docs.yml` appelle `mike deploy dev` sur push `develop` et `mike deploy latest` sur push `master`.
