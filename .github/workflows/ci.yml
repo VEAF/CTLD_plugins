@@ -58,6 +58,17 @@ jobs:
       - name: Run busted
         run: busted tests/ plugins/
 
+  # Documentation coherence gate: README front-matter + generated doc pages.
+  validate-docs:
+    name: Validate plugin docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PyYAML
+        run: pip install pyyaml
+      - name: Check README / generated docs coherence
+        run: python tools/ci/validate_docs.py
+
   # Build every plugin into dist/<plugin>.lua and upload as artifacts.
   build:
     name: Build plugins
