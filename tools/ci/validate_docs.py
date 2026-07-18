@@ -22,14 +22,17 @@ warnings = []
 
 
 def parse_frontmatter(path):
-    """Return parsed front-matter dict, or None if absent/malformed."""
+    """Return parsed front-matter dict, None if absent, or Exception if malformed."""
     with open(path, encoding="utf-8") as f:
         content = f.read()
 
-    # Strip comment lines from inside the YAML front-matter before parsing
+    if not content.startswith("---\n"):
+        return None  # front-matter truly absent
+
+    # Opening --- found: expect a closing --- too
     match = re.match(r"^---\n(.*?)\n---", content, re.DOTALL)
     if not match:
-        return None
+        return Exception("opening '---' found but closing '---' is missing or malformed")
 
     raw_yaml = match.group(1)
     # Remove YAML comment lines
