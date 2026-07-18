@@ -66,3 +66,11 @@ The `validate-docs` job runs `tools/ci/validate_docs.py` on every push and PR. I
   - `docs/plugins/<name>.md` or `docs/plugins/<name>.fr.md` is absent.
 
 Run it locally before pushing: `python tools/ci/validate_docs.py` (requires `pyyaml`).
+
+## Documentation site
+
+| Version | URL |
+|---------|-----|
+| Production (`latest`, from `master`) | <https://veaf.github.io/CTLD_plugins/latest/> |
+| Recette (`dev`, from `develop`) | <https://veaf.github.io/CTLD_plugins/dev/> |
+| Racine (redirects to `latest`) | <https://veaf.github.io/CTLD_plugins/> |
