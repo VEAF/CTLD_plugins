@@ -14,7 +14,7 @@ modUrls:
 
 # Metal FARP
 
-Ce plugin permet via CTLD de faire apparaitre un héliport métallique de façon progressive pour simuler sa construction, en y ajoutant des objets pour obtenir un héliport "décoré" plus réaliste.
+Ce plugin permet via CTLD de faire apparaître un héliport métallique de façon progressive pour simuler sa construction, en y ajoutant des objets pour obtenir un héliport "décoré" plus réaliste.
 
 ## Prérequis
 
