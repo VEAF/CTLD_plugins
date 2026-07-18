@@ -21,4 +21,10 @@ commentée :
    être stock.
 3. `busted tests/ plugins/` — le gate d'assets échoue sur tout type inconnu/non déclaré.
 4. `tools/build/merge_plugin.ps1 -Plugin <votre-plugin>` → `dist/<votre-plugin>.lua`.
-5. Ajoutez une page de catalogue sous `docs/plugins/`.
+5. Copiez `plugins/_template/README.md` vers `plugins/<votre-plugin>/README.md`. Renseignez le
+   front-matter (`modUrls` pour chaque mod requis) et rédigez la prose de description en **français**.
+   La section `modUrls` peut être supprimée entièrement si le plugin n'utilise aucun mod.
+6. Demandez à Claude d'exécuter le skill `generate-plugin-doc` pour générer
+   `docs/plugins/<votre-plugin>.md` et `docs/plugins/<votre-plugin>.fr.md` depuis votre README.
+   Committez les fichiers générés.
+7. Ajoutez le plugin dans le tableau du catalogue dans `docs/index.md` et `docs/index.fr.md`.

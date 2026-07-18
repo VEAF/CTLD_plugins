@@ -18,4 +18,9 @@ plugin — it exercises every extension point a scene can use, heavily commented
    (and set `requiresMod` for the catalogue). All other types must be stock.
 3. `busted tests/ plugins/` — the asset gate fails on any undeclared/unknown type.
 4. `tools/build/merge_plugin.ps1 -Plugin <your-plugin>` → `dist/<your-plugin>.lua`.
-5. Add a catalogue page under `docs/plugins/`.
+5. Copy `plugins/_template/README.md` to `plugins/<your-plugin>/README.md`. Fill in the
+   front-matter (`modUrls` for each required mod) and write the description prose in **French**.
+   The `modUrls` section can be removed entirely if the plugin uses no mods.
+6. Ask Claude to run the `generate-plugin-doc` skill to generate `docs/plugins/<your-plugin>.md`
+   and `docs/plugins/<your-plugin>.fr.md` from your README. Commit the generated files.
+7. Add the plugin to the catalogue table in `docs/index.md` and `docs/index.fr.md`.
