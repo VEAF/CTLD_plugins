@@ -60,4 +60,5 @@ nav:
   - Plugins:
     - Metal FARP: plugins/metal-farp.md
   - For authors:
+    - Plugin dev guide: plugin-dev-guide.md
     - Template: plugins/template.md
