@@ -3,6 +3,9 @@
 -- Smoke test for the reference template scene: it registers its model, injects a crate, and wires a
 -- radio submenu — proving the full extension surface (and CTLD's load-position-independent
 -- deferMenuSection) works for a plugin loaded after CTLD.
+--
+-- For the full plugin development and test guide (unit tests + DCS visual testing loop):
+-- docs/plugin-dev-guide.md  (rendered at https://veaf.github.io/CTLD_plugins/)
 -- ============================================================
 
 local ROOT = debug.getinfo(1, "S").source:match("^@(.+)plugins[\\/]") or ""
