@@ -49,3 +49,28 @@ docs/                    mkdocs bilingual (EN + FR) catalogue
 
 The vendored `vendor/CTLD.lua` and `tests/data/dcs_types.lua` are pinned to a CTLD baseline; refresh
 them together when bumping the supported CTLD version.
+
+- **Document a plugin:** create `plugins/<name>/README.md` (use `plugins/_template/README.md` as
+  model), then run the `generate-plugin-doc` skill in Claude to produce `docs/plugins/<name>.md`
+  and `docs/plugins/<name>.fr.md`. Finally add the plugin row to `docs/index.md` and
+  `docs/index.fr.md`.
+
+### CI gate — `validate-docs`
+
+The `validate-docs` job runs `tools/ci/validate_docs.py` on every push and PR. It:
+
+- **Warns** (exit 0) when a plugin has no `README.md` (docs will have no prose, but the build is not blocked).
+- **Errors** (exit 1) when:
+  - `README.md` is present but its YAML front-matter is absent or malformed.
+  - `modUrls` exists but is not a list of `{mod, url}` pairs.
+  - `docs/plugins/<name>.md` or `docs/plugins/<name>.fr.md` is absent.
+
+Run it locally before pushing: `python tools/ci/validate_docs.py` (requires `pyyaml`).
+
+## Documentation site
+
+| Version | URL |
+|---------|-----|
+| Production (`latest`, from `master`) | <https://veaf.github.io/CTLD_plugins/latest/> |
+| Recette (`dev`, from `develop`) | <https://veaf.github.io/CTLD_plugins/dev/> |
+| Racine (redirects to `latest`) | <https://veaf.github.io/CTLD_plugins/> |

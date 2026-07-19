@@ -15,6 +15,6 @@ only pays for them if it opts in.
 
 ## Available plugins
 
-| Plugin | What it builds | Requires |
-|--------|----------------|----------|
-| [Metal FARP](plugins/metal-farp.md) | A metal-helipad FARP | DCS mod `Farp_FG_Petit_Helipad` |
+| Plugin | What it builds | Requires | Download |
+|--------|----------------|----------|----------|
+| [Metal FARP](plugins/metal-farp.md) | A metal-helipad FARP | DCS mod `FG_small_Helipad` | [⬇ metal-farp.lua](downloads/CTLD_metalFarpScene.lua){ download .md-button } |

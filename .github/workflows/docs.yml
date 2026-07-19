@@ -2,16 +2,16 @@ name: Docs
 
 on:
   push:
-    branches: [develop]
-    paths: ['docs/**', 'mkdocs.yml', '.github/workflows/docs.yml']
+    branches: [develop, master]
+    paths: ['docs/**', 'plugins/**/src/*.lua', 'mkdocs.yml', '.github/workflows/docs.yml']
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build-deploy:
-    name: Build & deploy catalogue
+  deploy:
+    name: Deploy versioned docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,10 +20,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - name: Install mkdocs-material + i18n
-        run: pip install mkdocs-material mkdocs-static-i18n
-      - name: Build
-        run: mkdocs build --strict
-      - name: Deploy to gh-pages
+      - name: Install dependencies
+        run: pip install mkdocs-material mkdocs-static-i18n mike
+      - name: Configure git for mike
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Copy plugin .lua files to docs/downloads/
+        run: |
+          mkdir -p docs/downloads
+          cp plugins/*/src/*.lua docs/downloads/
+      - name: Inject branch into download URLs
+        # Replace /master/ with the actual branch in raw download links,
+        # so the dev docs point to develop-branch sources.
+        run: |
+          branch="${GITHUB_REF_NAME}"
+          if [ "$branch" != "master" ]; then
+            find docs -name "*.md" -exec sed -i \
+              "s|/CTLD_plugins/master/|/CTLD_plugins/${branch}/|g" {} \;
+          fi
+      - name: Deploy latest (master → latest)
+        if: github.ref == 'refs/heads/master'
+        run: |
+          mike deploy --push --update-aliases master latest
+          mike set-default --push latest
+      - name: Deploy dev (develop → dev)
         if: github.ref == 'refs/heads/develop'
-        run: mkdocs gh-deploy --force
+        run: mike deploy --push --update-aliases develop dev
