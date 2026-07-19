@@ -27,7 +27,7 @@
     
     
       
-        <title>README plugin comme source de vérité documentaire - CTLD Plugins</title>
+        <title>Plugin README as documentation source of truth - CTLD Plugins</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#readme-plugin-comme-source-de-verite-documentaire" class="md-skip">
+        <a href="#plugin-readme-as-documentation-source-of-truth" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              README plugin comme source de vérité documentaire
+              Plugin README as documentation source of truth
             
           </span>
         </div>
@@ -511,10 +511,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#alternatives-considerees" class="md-nav__link">
+  <a href="#alternatives-considered" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alternatives considérées
+        Alternatives considered
       
     </span>
   </a>
@@ -525,7 +525,7 @@
   <a href="#consequences" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conséquences
+        Consequences
       
     </span>
   </a>
@@ -552,18 +552,18 @@
   
 
 
-<h1 id="readme-plugin-comme-source-de-verite-documentaire">README plugin comme source de vérité documentaire<a class="headerlink" href="#readme-plugin-comme-source-de-verite-documentaire" title="Permanent link">&para;</a></h1>
-<p>Chaque plugin possède un <code>plugins/{nom}/README.md</code> (front-matter YAML + prose FR) qui est l'unique source de vérité pour sa documentation. Les fichiers <code>docs/plugins/{nom}.md</code> et <code>{nom}.fr.md</code> sont <strong>générés</strong> par un skill Claude interactif — jamais édités à la main.</p>
-<h2 id="alternatives-considerees">Alternatives considérées<a class="headerlink" href="#alternatives-considerees" title="Permanent link">&para;</a></h2>
+<h1 id="plugin-readme-as-documentation-source-of-truth">Plugin README as documentation source of truth<a class="headerlink" href="#plugin-readme-as-documentation-source-of-truth" title="Permanent link">&para;</a></h1>
+<p>Each plugin has a <code>plugins/{name}/README.md</code> (YAML front-matter + French prose) that is the single source of truth for its documentation. The files <code>docs/plugins/{name}.md</code> and <code>{name}.fr.md</code> are <strong>generated</strong> by an interactive Claude skill — never edited by hand.</p>
+<h2 id="alternatives-considered">Alternatives considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>meta.yaml</code> séparé + prose dans <code>docs/</code></strong> : deux fichiers à maintenir en sync, risque de désynchronisation.</li>
-<li><strong>Métadonnées dans le <code>.lua</code></strong> : le <code>.lua</code> tourne dans DCS — y coller des URLs GitHub pollue le code runtime avec de la pure métadonnée documentaire sans valeur à l'exécution.</li>
+<li><strong>Separate <code>meta.yaml</code> + prose in <code>docs/</code></strong>: two files to keep in sync, risk of divergence.</li>
+<li><strong>Metadata embedded in the <code>.lua</code></strong>: the <code>.lua</code> runs inside DCS — embedding GitHub URLs there pollutes runtime code with pure documentary metadata that has no value at execution time.</li>
 </ul>
-<h2 id="consequences">Conséquences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h2>
+<h2 id="consequences">Consequences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Les <code>docs/plugins/</code> doivent être régénérés après chaque modification du <code>README.md</code> d'un plugin.</li>
-<li>Le <code>plugins/_template/README.md</code> fait loi comme template de référence pour les auteurs.</li>
-<li>La traduction FR→EN est produite par Claude à la demande du concepteur (interactif), pas par la CI.</li>
+<li><code>docs/plugins/</code> files must be regenerated after every change to a plugin's <code>README.md</code>.</li>
+<li><code>plugins/_template/README.md</code> is the authoritative template for plugin authors.</li>
+<li>The FR→EN translation is produced by Claude on demand from the designer (interactive), not by CI.</li>
 </ul>
 
 

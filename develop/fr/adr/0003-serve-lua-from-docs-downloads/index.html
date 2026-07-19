@@ -10,33 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://veaf.github.io/CTLD_plugins/develop/fr/">
+        <link rel="canonical" href="https://veaf.github.io/CTLD_plugins/develop/fr/adr/0003-serve-lua-from-docs-downloads/">
       
       
-      
-        <link rel="next" href="plugins/metal-farp/">
       
       
         
-          <link rel="alternate" href="/CTLD_plugins/develop/" hreflang="en">
+          <link rel="alternate" href="../../../adr/0003-serve-lua-from-docs-downloads/" hreflang="en">
         
-          <link rel="alternate" href="/CTLD_plugins/develop/fr/" hreflang="fr">
+          <link rel="alternate" href="./" hreflang="fr">
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Home - CTLD Plugins</title>
+        <title>Serve plugin .lua files from docs/downloads/ instead of raw.githubusercontent.com - CTLD Plugins</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -55,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#catalogue-des-plugins-ctld" class="md-skip">
+        <a href="#serve-plugin-lua-files-from-docsdownloads-instead-of-rawgithubusercontentcom" class="md-skip">
           Aller au contenu
         </a>
       
@@ -100,7 +98,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="En-tête">
-    <a href="./" title="CTLD Plugins" class="md-header__button md-logo" aria-label="CTLD Plugins" data-md-component="logo">
+    <a href="../../" title="CTLD Plugins" class="md-header__button md-logo" aria-label="CTLD Plugins" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -120,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Serve plugin .lua files from docs/downloads/ instead of raw.githubusercontent.com
             
           </span>
         </div>
@@ -167,13 +165,13 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="/CTLD_plugins/develop/" hreflang="en" class="md-select__link">
+            <a href="../../../adr/0003-serve-lua-from-docs-downloads/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="/CTLD_plugins/develop/fr/" hreflang="fr" class="md-select__link">
+            <a href="./" hreflang="fr" class="md-select__link">
               Français
             </a>
           </li>
@@ -262,7 +260,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="./" title="CTLD Plugins" class="md-nav__button md-logo" aria-label="CTLD Plugins" data-md-component="logo">
+    <a href="../../" title="CTLD Plugins" class="md-nav__button md-logo" aria-label="CTLD Plugins" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -289,37 +287,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -335,48 +306,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#utiliser-un-plugin" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Utiliser un plugin
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#plugins-disponibles" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Plugins disponibles
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -440,7 +369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="plugins/metal-farp/" class="md-nav__link">
+      <a href="../../plugins/metal-farp/" class="md-nav__link">
         
   
   
@@ -527,7 +456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="plugins/template/" class="md-nav__link">
+      <a href="../../plugins/template/" class="md-nav__link">
         
   
   
@@ -582,10 +511,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#utiliser-un-plugin" class="md-nav__link">
+  <a href="#problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Utiliser un plugin
+        Problem
       
     </span>
   </a>
@@ -593,10 +522,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#plugins-disponibles" class="md-nav__link">
+  <a href="#alternatives-considered" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Plugins disponibles
+        Alternatives considered
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequences
       
     </span>
   </a>
@@ -623,38 +563,22 @@
   
 
 
-<h1 id="catalogue-des-plugins-ctld">Catalogue des plugins CTLD<a class="headerlink" href="#catalogue-des-plugins-ctld" title="Permanent link">&para;</a></h1>
-<p><strong>Scènes</strong> optionnelles et enfichables pour <a href="https://github.com/VEAF/CTLD">CTLD</a>. Chaque plugin est
-un unique fichier <code>.lua</code> que vous chargez depuis un déclencheur au <strong>démarrage de la mission, après
-CTLD</strong> ; il s'enregistre tout seul. Un plugin = une scène.</p>
-<p>Ces scènes vivent ici (plutôt que dans <code>CTLD.lua</code>) lorsqu'elles dépendent d'un <strong>mod</strong> DCS : une
-mission ne les embarque que si elle le décide.</p>
-<h2 id="utiliser-un-plugin">Utiliser un plugin<a class="headerlink" href="#utiliser-un-plugin" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Téléchargez le <code>.lua</code> du plugin (voir sa page ci-dessous, ou les <em>releases</em>).</li>
-<li>Ajoutez un déclencheur <code>DO SCRIPT FILE</code> au <strong>démarrage de la mission</strong>, <strong>après</strong> le déclencheur
-   qui charge <code>CTLD.lua</code>.</li>
-<li>Installez le mod DCS requis sur tous les clients — la page de chaque plugin liste ses prérequis.</li>
-</ol>
-<h2 id="plugins-disponibles">Plugins disponibles<a class="headerlink" href="#plugins-disponibles" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Plugin</th>
-<th>Ce qu'il construit</th>
-<th>Requiert</th>
-<th>Télécharger</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="plugins/metal-farp/">Metal FARP</a></td>
-<td>Un FARP à hélisurface métallique</td>
-<td>Mod DCS <code>FG_small_Helipad</code></td>
-<td><a class="md-button" download="download" href="../downloads/CTLD_metalFarpScene.lua">⬇ metal-farp.lua</a></td>
-</tr>
-</tbody>
-</table>
+<h1 id="serve-plugin-lua-files-from-docsdownloads-instead-of-rawgithubusercontentcom">Serve plugin <code>.lua</code> files from <code>docs/downloads/</code> instead of <code>raw.githubusercontent.com</code><a class="headerlink" href="#serve-plugin-lua-files-from-docsdownloads-instead-of-rawgithubusercontentcom" title="Permanent link">&para;</a></h1>
+<p>Plugin <code>.lua</code> files are copied into <code>docs/downloads/</code> by CI before the MkDocs build, so they are served from the same origin as the docs site (<code>veaf.github.io</code>). Download buttons point to this relative path and carry the <code>download</code> attribute, guaranteeing a native browser file download in all browsers.</p>
+<h2 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h2>
+<p>The HTML <code>download</code> attribute is silently ignored by Chrome (and Chromium-based browsers) when the link points to a cross-origin URL, even if CORS headers are present. <code>raw.githubusercontent.com</code> is a different origin from <code>veaf.github.io</code>: clicking the button was opening the file in the browser instead of downloading it.</p>
+<h2 id="alternatives-considered">Alternatives considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>download</code> attribute on the raw URL</strong>: ignored by Chrome for cross-origin links — the problem persists.</li>
+<li><strong>Link to the GitHub blob page (<code>/blob/</code>)</strong>: requires two clicks; the mission maker lands on the GitHub UI before being able to download.</li>
+<li><strong>Package <code>.lua</code> as a GitHub Release asset</strong>: requires a dedicated release workflow and adds disproportionate operational complexity.</li>
+</ul>
+<h2 id="consequences">Consequences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>.lua</code> files are duplicated in the built site (negligible size).</li>
+<li>Branch coherence is automatic: CI copies the files from the branch currently being built.</li>
+<li>The existing <code>sed</code> branch-injection step in <code>docs.yml</code> no longer applies to <code>.lua</code> download URLs (harmless: these URLs are now relative paths).</li>
+</ul>
 
 
 
@@ -710,10 +634,10 @@ mission ne les embarque que si elle le décide.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

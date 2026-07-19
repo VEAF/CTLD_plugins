@@ -2,70 +2,84 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/adr/0001-readme-as-doc-source-of-truth/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop/adr/0001-readme-as-doc-source-of-truth/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/adr/0001-readme-as-doc-source-of-truth/"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/adr/0002-mike-versioned-docs/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop/adr/0002-mike-versioned-docs/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/adr/0002-mike-versioned-docs/"/>
     </url>
     <url>
+        <loc>https://veaf.github.io/CTLD_plugins/develop/adr/0003-serve-lua-from-docs-downloads/</loc>
+        <lastmod>2026-07-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop/adr/0003-serve-lua-from-docs-downloads/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/adr/0003-serve-lua-from-docs-downloads/"/>
+    </url>
+    <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/plugins/metal-farp/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop/plugins/metal-farp/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/plugins/metal-farp/"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/plugins/template/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop/plugins/template/"/>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/plugins/template/"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/fr/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/fr/adr/0001-readme-as-doc-source-of-truth/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/adr/0001-readme-as-doc-source-of-truth/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/developadr/0001-readme-as-doc-source-of-truth/"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/fr/adr/0002-mike-versioned-docs/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/adr/0002-mike-versioned-docs/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/developadr/0002-mike-versioned-docs/"/>
     </url>
     <url>
+        <loc>https://veaf.github.io/CTLD_plugins/develop/fr/adr/0003-serve-lua-from-docs-downloads/</loc>
+        <lastmod>2026-07-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/adr/0003-serve-lua-from-docs-downloads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/developadr/0003-serve-lua-from-docs-downloads/"/>
+    </url>
+    <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/fr/plugins/metal-farp/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/plugins/metal-farp/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/developplugins/metal-farp/"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/fr/plugins/template/</loc>
-        <lastmod>2026-07-18</lastmod>
+        <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/plugins/template/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/developplugins/template/"/>

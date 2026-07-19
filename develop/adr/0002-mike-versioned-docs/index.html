@@ -27,7 +27,7 @@
     
     
       
-        <title>Versioning du site docs avec mike (latest / dev) - CTLD Plugins</title>
+        <title>Versioned docs site with mike (latest / dev) - CTLD Plugins</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#versioning-du-site-docs-avec-mike-latest-dev" class="md-skip">
+        <a href="#versioned-docs-site-with-mike-latest-dev" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Versioning du site docs avec mike (latest / dev)
+              Versioned docs site with mike (latest / dev)
             
           </span>
         </div>
@@ -511,10 +511,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#alternatives-considerees" class="md-nav__link">
+  <a href="#alternatives-considered" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Alternatives considérées
+        Alternatives considered
       
     </span>
   </a>
@@ -522,10 +522,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#urls-du-site" class="md-nav__link">
+  <a href="#site-urls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        URLs du site
+        Site URLs
       
     </span>
   </a>
@@ -536,7 +536,7 @@
   <a href="#consequences" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conséquences
+        Consequences
       
     </span>
   </a>
@@ -563,45 +563,45 @@
   
 
 
-<h1 id="versioning-du-site-docs-avec-mike-latest-dev">Versioning du site docs avec mike (latest / dev)<a class="headerlink" href="#versioning-du-site-docs-avec-mike-latest-dev" title="Permanent link">&para;</a></h1>
-<p>Le site MkDocs Material est géré par <strong>mike</strong>, avec deux versions coexistant sur GitHub Pages : <code>latest</code> (branch <code>master</code>) et <code>dev</code> (branch <code>develop</code>). Chaque version injecte sa propre valeur de <code>{branch}</code> dans les boutons download, garantissant qu'un testeur sur <code>dev</code> télécharge bien le <code>.lua</code> de <code>develop</code> et non de <code>master</code>.</p>
-<h2 id="alternatives-considerees">Alternatives considérées<a class="headerlink" href="#alternatives-considerees" title="Permanent link">&para;</a></h2>
+<h1 id="versioned-docs-site-with-mike-latest-dev">Versioned docs site with mike (latest / dev)<a class="headerlink" href="#versioned-docs-site-with-mike-latest-dev" title="Permanent link">&para;</a></h1>
+<p>The MkDocs Material site is managed by <strong>mike</strong>, with two versions coexisting on GitHub Pages: <code>latest</code> (branch <code>master</code>) and <code>dev</code> (branch <code>develop</code>). Each version injects its own <code>{branch}</code> value into download buttons, ensuring that a tester on <code>dev</code> downloads the <code>.lua</code> from <code>develop</code> and not from <code>master</code>.</p>
+<h2 id="alternatives-considered">Alternatives considered<a class="headerlink" href="#alternatives-considered" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Un seul site (master uniquement)</strong> : impossible de tester la doc et les liens download en recette sans bricolage — le testeur aurait cliqué "télécharger" et obtenu la version stable, pas celle en cours de test.</li>
-<li><strong>Deux sites séparés (<code>/</code> et <code>/dev/</code>)</strong> : fonctionne mais perd le sélecteur de version intégré, déjà validé dans l'orga VEAF (<code>veaf.github.io/documentation/</code>).</li>
+<li><strong>Single site (master only)</strong>: impossible to test the docs and download links in staging without workarounds — the tester would have clicked "download" and received the stable version, not the one under test.</li>
+<li><strong>Two separate sites (<code>/</code> and <code>/dev/</code>)</strong>: works but loses the built-in version selector, already validated in the VEAF org (<code>veaf.github.io/documentation/</code>).</li>
 </ul>
-<h2 id="urls-du-site">URLs du site<a class="headerlink" href="#urls-du-site" title="Permanent link">&para;</a></h2>
+<h2 id="site-urls">Site URLs<a class="headerlink" href="#site-urls" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Version</th>
 <th>URL</th>
-<th>Déclencheur</th>
+<th>Trigger</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Production (<code>latest</code>)</td>
 <td><a href="https://veaf.github.io/CTLD_plugins/latest/">https://veaf.github.io/CTLD_plugins/latest/</a></td>
-<td>push <code>master</code></td>
+<td>push to <code>master</code></td>
 </tr>
 <tr>
-<td>Recette (<code>dev</code>)</td>
+<td>Staging (<code>dev</code>)</td>
 <td><a href="https://veaf.github.io/CTLD_plugins/dev/">https://veaf.github.io/CTLD_plugins/dev/</a></td>
-<td>push <code>develop</code></td>
+<td>push to <code>develop</code></td>
 </tr>
 <tr>
-<td>Racine</td>
+<td>Root</td>
 <td><a href="https://veaf.github.io/CTLD_plugins/">https://veaf.github.io/CTLD_plugins/</a></td>
-<td>redirige vers <code>latest</code></td>
+<td>redirects to <code>latest</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="consequences">Conséquences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h2>
+<h2 id="consequences">Consequences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Le workflow <code>docs.yml</code> appelle <code>mike deploy dev</code> sur push <code>develop</code> et <code>mike deploy latest</code> sur push <code>master</code>.</li>
-<li><code>{branch}</code> est une variable injectée à la génération des docs (skill Claude) — valeur <code>develop</code> ou <code>master</code>.</li>
-<li>Le <code>versions.json</code> géré par mike doit rester en <code>gh-pages</code>, ne pas être commité dans <code>develop</code>/<code>master</code>.</li>
+<li>The <code>docs.yml</code> workflow calls <code>mike deploy dev</code> on push to <code>develop</code> and <code>mike deploy latest</code> on push to <code>master</code>.</li>
+<li><code>{branch}</code> is a variable injected at doc generation time (Claude skill) — value is <code>develop</code> or <code>master</code>.</li>
+<li>The <code>versions.json</code> managed by mike must stay on <code>gh-pages</code>, not committed to <code>develop</code>/<code>master</code>.</li>
 </ul>
 
 
