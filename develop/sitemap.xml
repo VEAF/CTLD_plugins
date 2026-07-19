@@ -8,6 +8,13 @@
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/"/>
     </url>
     <url>
+        <loc>https://veaf.github.io/CTLD_plugins/develop/plugin-dev-guide/</loc>
+        <lastmod>2026-07-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop/plugin-dev-guide/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/developfr/plugin-dev-guide/"/>
+    </url>
+    <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/adr/0001-readme-as-doc-source-of-truth/</loc>
         <lastmod>2026-07-19</lastmod>
         <changefreq>daily</changefreq>
@@ -48,6 +55,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/develop"/>
+    </url>
+    <url>
+        <loc>https://veaf.github.io/CTLD_plugins/develop/fr/plugin-dev-guide/</loc>
+        <lastmod>2026-07-19</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://veaf.github.io/CTLD_plugins/develop/fr/plugin-dev-guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://veaf.github.io/CTLD_plugins/developplugin-dev-guide/"/>
     </url>
     <url>
         <loc>https://veaf.github.io/CTLD_plugins/develop/fr/adr/0001-readme-as-doc-source-of-truth/</loc>
