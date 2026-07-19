@@ -25,12 +25,12 @@ Two files, both beginning with the `do not edit` comment:
 ### `docs/plugins/{name}.fr.md`
 
 - Title: `# {scene name}` (from `.lua`)
-- Download button (primary): `[⬇ {name}.lua](../downloads/{lua_file}){ .md-button .md-button--primary download }`
+- Download button (primary): `[⬇ {name}.lua](../downloads/{lua_file}){ download="{name}.lua" .md-button .md-button--primary }`
 - Sections: Description, Prérequis, Installation, Remarques (omit if empty)
 - Content: the French prose from `README.md` body (if present), otherwise minimal generated text
 - Mod links: for each entry in `modUrls`, add a link in the Prérequis section:
-  `[⬇ {mod}]({url}){ .md-button target="ext-{mod}" rel="noopener" }`
-- External prose links: any hyperlink pointing to an external site must use `target="_blank" rel="noopener"`
+  `[⬇ {mod}]({url}){ .md-button }`
+- External prose links: write them as plain markdown links — the MkDocs hook (`hooks.py`) automatically adds `target` and `rel="noopener"` to all external links at build time
 
 ### `docs/plugins/{name}.md`
 

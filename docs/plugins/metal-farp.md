@@ -2,7 +2,7 @@
 
 # Metal FARP
 
-[⬇ metal-farp.lua](../downloads/CTLD_metalFarpScene.lua){ download .md-button .md-button--primary }
+[⬇ metal-farp.lua](../downloads/CTLD_metalFarpScene.lua){ download="metal-farp.lua" .md-button .md-button--primary }
 
 This plugin uses CTLD to progressively deploy a metal helipad, simulating its construction,
 and surrounds it with equipment objects to create a more realistic "dressed" forward arming
@@ -14,7 +14,7 @@ and refuelling point.
 - The DCS mod **`FG_small_Helipad`** installed on **all** clients.
   Without it, the helipad cannot spawn.
 
-  [⬇ FG_small_Helipad](https://github.com/FullGas1/DCS-mods/tree/main/FG_small_Helipad){ .md-button target="ext-FG_small_Helipad" rel="noopener" }
+  [⬇ FG_small_Helipad](https://github.com/FullGas1/DCS-mods/tree/main/FG_small_Helipad){ .md-button }
 
 ## Install
 

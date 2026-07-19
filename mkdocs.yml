@@ -47,6 +47,9 @@ plugins:
           name: Français
           build: true
 
+hooks:
+  - hooks.py
+
 extra:
   version:
     provider: mike
