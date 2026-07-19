@@ -1,5 +1,12 @@
 [
   {
+    "version": "master",
+    "title": "master",
+    "aliases": [
+      "latest"
+    ]
+  },
+  {
     "version": "develop",
     "title": "develop",
     "aliases": [
