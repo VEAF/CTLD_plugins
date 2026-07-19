@@ -8,19 +8,20 @@
 -- whether the mod is installed or not.
 --
 -- Layout (all offsets from trigger unit position):
---   Fuel truck              —  0  s
---   Repair truck            —  0  s
---   Tent                    —  0.5 s
---   Tower Crane             —  5.5 s  (~59 m / 10°, 10 m right of pad)
---   FG_small_Helipad_Under_Construction — 10.5 s  (58 m / 0°)
---   [destroy Under_Construction]        — 30.5 s
---   FG_small_Helipad heliport           — 30.5 s  (58 m / 0°)
---   [destroy Tower Crane]               — 35.5 s
---   Ammo cargo              — 35.5 s
---   M92 light panel         — 40  s   alt+4 m
---   Windsock                — 40  s
---   Carrier Seaman          — 40  s
---   Warehouse stocking      — 45  s   10 000 L × 4 fuel types
+--   NOTE: delayAfterPreviousStep on step N = time before step N+1 starts.
+--   Fuel truck              —  0.0 s
+--   Repair truck            —  0.0 s
+--   Tent                    —  0.0 s  (delay=0.5 -> crane at 0.5 s)
+--   Tower Crane             —  0.5 s  (~59 m / 20°, ~20 m right of pad, delay=5 -> UC at 5.5 s)
+--   FG_small_Helipad_Under_Construction — 5.5 s  (58 m / 0°, delay=20 -> destroy at 25.5 s)
+--   [destroy Under_Construction]        — 25.5 s (delay=0 -> helipad immediately)
+--   FG_small_Helipad heliport           — 25.5 s (58 m / 0°, delay=5 -> crane gone at 30.5 s)
+--   [destroy Tower Crane]               — 30.5 s (delay=0 -> ammo immediately)
+--   Ammo cargo              — 30.5 s
+--   M92 light panel         — 35.0 s  alt+4 m
+--   Windsock                — 35.0 s
+--   Carrier Seaman          — 35.0 s
+--   Warehouse stocking      — 40.0 s  10 000 L x 4 fuel types
 --
 -- Dependencies: CTLDObjectRegistry, CTLDSceneManager, CTLDUtils
 -- ====================================================================================================
@@ -65,6 +66,8 @@ CTLDObjectRegistry.registerIfAbsent("FG_small_Helipad", {
 
 -- Visual-only under-construction variant of FG_small_Helipad, used during the animation phase.
 -- Ships in the same mod zip as FG_small_Helipad — no additional modUrls entry needed.
+-- category = "Fortifications": coalition.addStaticObject returns a proper handle (unlike "Heliports"
+-- which creates a ghost Airbase in DCS memory). probeSkip suppresses the CTLDModValidator alarm.
 CTLDObjectRegistry.registerIfAbsent("FG_small_Helipad_Under_Construction", {
     groupType  = "STATIC",
     namePrefix = "FARP_Helipad_UC",
@@ -222,7 +225,7 @@ metalFarpScene.steps        = {
     -- Reference saved in scene._params for later destruction.
     -- ----------------------------------------------------------------
     {
-        polar                    = { distance = 59, angle = 10 },
+        polar                    = { distance = 59, angle = 20 },
         delayAfterPreviousStep   = 5,
         relativeHeadingInDegrees = 0,
         relativeAltitudeInMeters = 0,
@@ -238,11 +241,11 @@ metalFarpScene.steps        = {
     -- ----------------------------------------------------------------
     -- Step 5: FG_small_Helipad_Under_Construction — visual construction
     -- phase, same footprint as the final pad (t0 + 10.5 s).
-    -- Reference saved in scene._params for later destruction.
+    -- Reference saved in scene._params for destruction in step 6.
     -- ----------------------------------------------------------------
     {
         polar                    = { distance = 58, angle = 0 },
-        delayAfterPreviousStep   = 5,
+        delayAfterPreviousStep   = 20,
         relativeHeadingInDegrees = 0,
         relativeAltitudeInMeters = 0,
         registryKey              = "FG_small_Helipad_Under_Construction",
@@ -256,10 +259,11 @@ metalFarpScene.steps        = {
 
     -- ----------------------------------------------------------------
     -- Step 6: Destroy FG_small_Helipad_Under_Construction — end of
-    -- construction animation (t0 + 30.5 s). No delay after this step.
+    -- construction animation (t0 + 25.5 s). delay=0 → helipad spawns
+    -- immediately after this step.
     -- ----------------------------------------------------------------
     {
-        delayAfterPreviousStep = 20,
+        delayAfterPreviousStep = 0,
         func                   = function(ctx)
             local obj = ctx.scene._params._underConstObj
             if obj and Object.isExist(obj) then
@@ -271,15 +275,15 @@ metalFarpScene.steps        = {
     },
 
     -- ----------------------------------------------------------------
-    -- Step 7: FG_small_Helipad heliport — finished pad revealed
-    -- immediately after construction (t0 + 30.5 s).
+    -- Step 7: FG_small_Helipad heliport — finished pad revealed immediately
+    -- after UC destruction (t0 + 30.5 s).
     -- critical=true: if the mod is absent the helipad cannot spawn;
     -- abort the whole scene rather than deploying equipment with no pad.
     -- Saves the spawned airbase name for the warehouse-stocking step.
     -- ----------------------------------------------------------------
     {
         polar                    = { distance = 58, angle = 0 },
-        delayAfterPreviousStep   = 0,
+        delayAfterPreviousStep   = 5,
         relativeHeadingInDegrees = 0,
         relativeAltitudeInMeters = 0,
         registryKey              = "FG_small_Helipad",
@@ -293,10 +297,11 @@ metalFarpScene.steps        = {
 
     -- ----------------------------------------------------------------
     -- Step 8: Destroy Tower Crane — construction prop removed 5 s
-    -- after the finished pad appears (t0 + 35.5 s).
+    -- after the finished pad appears (t0 + 30.5 s). delay=0 here because
+    -- the 5 s gap is carried by step 7's delayAfterPreviousStep.
     -- ----------------------------------------------------------------
     {
-        delayAfterPreviousStep = 5,
+        delayAfterPreviousStep = 0,
         func                   = function(ctx)
             local obj = ctx.scene._params._craneObj
             if obj and Object.isExist(obj) then
