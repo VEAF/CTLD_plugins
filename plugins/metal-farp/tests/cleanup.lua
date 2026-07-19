@@ -37,5 +37,18 @@ for _, coa in ipairs({ coalition.side.BLUE, coalition.side.RED, coalition.side.N
     end
 end
 
+-- Spawned airbases (FARPs, helipads) persist as Airbase objects after their
+-- static is destroyed. Destroy all non-airdrome airbases (cat ~= 0).
+local abDestroyed = 0
+for _, ab in ipairs(world.getAirbases() or {}) do
+    local desc = ab:getDesc()
+    local cat  = desc and desc.category or -1
+    if cat ~= 0 then
+        ab:destroy()
+        abDestroyed = abDestroyed + 1
+    end
+end
+destroyed = destroyed + abDestroyed
+
 env.info("[cleanup] Done — " .. destroyed .. " object(s) destroyed, '" .. KEEP_GROUP .. "' preserved.", false)
 trigger.action.outText("[cleanup] Scene cleared (" .. destroyed .. " objects). Ready for next injection.", 5)
