@@ -1,22 +1,22 @@
-# Versioning du site docs avec mike (latest / dev)
+# Versioned docs site with mike (latest / dev)
 
-Le site MkDocs Material est géré par **mike**, avec deux versions coexistant sur GitHub Pages : `latest` (branch `master`) et `dev` (branch `develop`). Chaque version injecte sa propre valeur de `{branch}` dans les boutons download, garantissant qu'un testeur sur `dev` télécharge bien le `.lua` de `develop` et non de `master`.
+The MkDocs Material site is managed by **mike**, with two versions coexisting on GitHub Pages: `latest` (branch `master`) and `dev` (branch `develop`). Each version injects its own `{branch}` value into download buttons, ensuring that a tester on `dev` downloads the `.lua` from `develop` and not from `master`.
 
-## Alternatives considérées
+## Alternatives considered
 
-- **Un seul site (master uniquement)** : impossible de tester la doc et les liens download en recette sans bricolage — le testeur aurait cliqué "télécharger" et obtenu la version stable, pas celle en cours de test.
-- **Deux sites séparés (`/` et `/dev/`)** : fonctionne mais perd le sélecteur de version intégré, déjà validé dans l'orga VEAF (`veaf.github.io/documentation/`).
+- **Single site (master only)**: impossible to test the docs and download links in staging without workarounds — the tester would have clicked "download" and received the stable version, not the one under test.
+- **Two separate sites (`/` and `/dev/`)**: works but loses the built-in version selector, already validated in the VEAF org (`veaf.github.io/documentation/`).
 
-## URLs du site
+## Site URLs
 
-| Version | URL | Déclencheur |
-|---------|-----|-------------|
-| Production (`latest`) | <https://veaf.github.io/CTLD_plugins/latest/> | push `master` |
-| Recette (`dev`) | <https://veaf.github.io/CTLD_plugins/dev/> | push `develop` |
-| Racine | <https://veaf.github.io/CTLD_plugins/> | redirige vers `latest` |
+| Version | URL | Trigger |
+| ------- | --- | ------- |
+| Production (`latest`) | <https://veaf.github.io/CTLD_plugins/latest/> | push to `master` |
+| Staging (`dev`) | <https://veaf.github.io/CTLD_plugins/dev/> | push to `develop` |
+| Root | <https://veaf.github.io/CTLD_plugins/> | redirects to `latest` |
 
-## Conséquences
+## Consequences
 
-- Le workflow `docs.yml` appelle `mike deploy dev` sur push `develop` et `mike deploy latest` sur push `master`.
-- `{branch}` est une variable injectée à la génération des docs (skill Claude) — valeur `develop` ou `master`.
-- Le `versions.json` géré par mike doit rester en `gh-pages`, ne pas être commité dans `develop`/`master`.
+- The `docs.yml` workflow calls `mike deploy dev` on push to `develop` and `mike deploy latest` on push to `master`.
+- `{branch}` is a variable injected at doc generation time (Claude skill) — value is `develop` or `master`.
+- The `versions.json` managed by mike must stay on `gh-pages`, not committed to `develop`/`master`.

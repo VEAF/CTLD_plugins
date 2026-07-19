@@ -2,7 +2,7 @@
 
 # Metal FARP
 
-[⬇ metal-farp.lua](https://raw.githubusercontent.com/VEAF/CTLD_plugins/master/plugins/metal-farp/src/CTLD_metalFarpScene.lua){ .md-button .md-button--primary }
+[⬇ metal-farp.lua](../downloads/CTLD_metalFarpScene.lua){ download .md-button .md-button--primary }
 
 Ce plugin permet via CTLD de faire apparaître un héliport métallique de façon progressive pour
 simuler sa construction, en y ajoutant des objets pour obtenir un héliport "décoré" plus réaliste.
@@ -13,7 +13,7 @@ simuler sa construction, en y ajoutant des objets pour obtenir un héliport "dé
 - Le mod DCS **`FG_small_Helipad`** installé sur **tous** les clients.
   Sans lui, l'héliport ne peut pas apparaître.
 
-  [⬇ FG_small_Helipad](https://github.com/FullGas1/DCS-mods/tree/main/FG_small_Helipad){ .md-button }
+  [⬇ FG_small_Helipad](https://github.com/FullGas1/DCS-mods/tree/main/FG_small_Helipad){ .md-button target="ext-FG_small_Helipad" rel="noopener" }
 
 ## Installation
 

@@ -25,11 +25,12 @@ Two files, both beginning with the `do not edit` comment:
 ### `docs/plugins/{name}.fr.md`
 
 - Title: `# {scene name}` (from `.lua`)
-- Download button (primary): `[⬇ {name}.lua]({raw_url}){ .md-button .md-button--primary }`
-  where `raw_url = https://raw.githubusercontent.com/VEAF/CTLD_plugins/master/plugins/{name}/src/{lua_file}`
+- Download button (primary): `[⬇ {name}.lua](../downloads/{lua_file}){ .md-button .md-button--primary download }`
 - Sections: Description, Prérequis, Installation, Remarques (omit if empty)
 - Content: the French prose from `README.md` body (if present), otherwise minimal generated text
-- Mod links: for each entry in `modUrls`, add a link `[⬇ {mod}]({url}){ .md-button }` in the Prérequis section
+- Mod links: for each entry in `modUrls`, add a link in the Prérequis section:
+  `[⬇ {mod}]({url}){ .md-button target="ext-{mod}" rel="noopener" }`
+- External prose links: any hyperlink pointing to an external site must use `target="_blank" rel="noopener"`
 
 ### `docs/plugins/{name}.md`
 
@@ -41,7 +42,7 @@ Two files, both beginning with the `do not edit` comment:
 
 - Never edit `docs/plugins/` files by hand after generation — they are owned by this skill.
 - If `README.md` is absent: generate minimal pages from `.lua` metadata only (no prose, no modUrls).
-- `{branch}` in download URLs is always `master` for now (mike versioning handles dev separately).
-- After writing both files, remind the author to add the plugin to `docs/index.md` and `docs/index.fr.md` if not already present.
+- Download buttons always use a relative path (`../downloads/{lua_file}`) — never an absolute URL.
+- After writing both files, remind the author to add the plugin to `docs/index.md` and `docs/index.fr.md` if not already present. In those index files, the download button path is `downloads/{lua_file}` (no leading `../`).
 
 </what-to-do>

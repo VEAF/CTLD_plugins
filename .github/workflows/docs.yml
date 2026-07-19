@@ -3,7 +3,7 @@ name: Docs
 on:
   push:
     branches: [develop, master]
-    paths: ['docs/**', 'mkdocs.yml', '.github/workflows/docs.yml']
+    paths: ['docs/**', 'plugins/**/src/*.lua', 'mkdocs.yml', '.github/workflows/docs.yml']
   workflow_dispatch:
 
 permissions:
@@ -26,6 +26,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Copy plugin .lua files to docs/downloads/
+        run: |
+          mkdir -p docs/downloads
+          cp plugins/*/src/*.lua docs/downloads/
       - name: Inject branch into download URLs
         # Replace /master/ with the actual branch in raw download links,
         # so the dev docs point to develop-branch sources.

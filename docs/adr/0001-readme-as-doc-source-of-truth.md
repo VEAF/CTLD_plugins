@@ -1,14 +1,14 @@
-# README plugin comme source de vérité documentaire
+# Plugin README as documentation source of truth
 
-Chaque plugin possède un `plugins/{nom}/README.md` (front-matter YAML + prose FR) qui est l'unique source de vérité pour sa documentation. Les fichiers `docs/plugins/{nom}.md` et `{nom}.fr.md` sont **générés** par un skill Claude interactif — jamais édités à la main.
+Each plugin has a `plugins/{name}/README.md` (YAML front-matter + French prose) that is the single source of truth for its documentation. The files `docs/plugins/{name}.md` and `{name}.fr.md` are **generated** by an interactive Claude skill — never edited by hand.
 
-## Alternatives considérées
+## Alternatives considered
 
-- **`meta.yaml` séparé + prose dans `docs/`** : deux fichiers à maintenir en sync, risque de désynchronisation.
-- **Métadonnées dans le `.lua`** : le `.lua` tourne dans DCS — y coller des URLs GitHub pollue le code runtime avec de la pure métadonnée documentaire sans valeur à l'exécution.
+- **Separate `meta.yaml` + prose in `docs/`**: two files to keep in sync, risk of divergence.
+- **Metadata embedded in the `.lua`**: the `.lua` runs inside DCS — embedding GitHub URLs there pollutes runtime code with pure documentary metadata that has no value at execution time.
 
-## Conséquences
+## Consequences
 
-- Les `docs/plugins/` doivent être régénérés après chaque modification du `README.md` d'un plugin.
-- Le `plugins/_template/README.md` fait loi comme template de référence pour les auteurs.
-- La traduction FR→EN est produite par Claude à la demande du concepteur (interactif), pas par la CI.
+- `docs/plugins/` files must be regenerated after every change to a plugin's `README.md`.
+- `plugins/_template/README.md` is the authoritative template for plugin authors.
+- The FR→EN translation is produced by Claude on demand from the designer (interactive), not by CI.
