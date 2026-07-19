@@ -4,18 +4,24 @@
 -- FG_small_Helipad mod (visible metallic helipad platform).
 --
 -- Requires the FG_small_Helipad mod to be installed on all clients.
--- probeSkip=true is set on the registry entry — the mod cannot be validated at runtime
--- (DCS getDesc().life == 0 whether the mod is installed or not).
+-- probeSkip=true is set on the registry entries for mod types — DCS getDesc().life == 0
+-- whether the mod is installed or not.
 --
 -- Layout (all offsets from trigger unit position):
---   FG_small_Helipad heliport — 58 m ahead of trigger unit
---   Fuel truck              — 35 m / 8°   heading 90° (t+5 s)
---   Repair truck            — 35 m / 11°  heading 90° (t+5 s)
---   Tent                    — 35 m / 10°  heading 90° (t+5.5 s)
---   Ammo cargo              — 75 m / 346°             (t+10 s)
---   M92 light panel         — 75 m / 355° alt+4 m    (t+15 s)
---   Windsock                — 73 m / 346°             (t+15 s)
---   Warehouse stocking      — 10 000 L × 4 fuel types (t+20 s)
+--   NOTE: delayAfterPreviousStep on step N = time before step N+1 starts.
+--   Fuel truck              —  0.0 s
+--   Repair truck            —  0.0 s
+--   Tent                    —  0.0 s  (delay=0.5 -> crane at 0.5 s)
+--   Tower Crane             —  0.5 s  (~59 m / 20°, ~20 m right of pad, delay=5 -> UC at 5.5 s)
+--   FG_small_Helipad_Under_Construction — 5.5 s  (58 m / 0°, delay=20 -> destroy at 25.5 s)
+--   [destroy Under_Construction]        — 25.5 s (delay=0 -> helipad immediately)
+--   FG_small_Helipad heliport           — 25.5 s (58 m / 0°, delay=5 -> crane gone at 30.5 s)
+--   [destroy Tower Crane]               — 30.5 s (delay=0 -> ammo immediately)
+--   Ammo cargo              — 30.5 s
+--   M92 light panel         — 35.0 s  alt+4 m
+--   Windsock                — 35.0 s
+--   Carrier Seaman          — 35.0 s
+--   Warehouse stocking      — 40.0 s  10 000 L x 4 fuel types
 --
 -- Dependencies: CTLDObjectRegistry, CTLDSceneManager, CTLDUtils
 -- ====================================================================================================
@@ -56,6 +62,27 @@ CTLDObjectRegistry.registerIfAbsent("FG_small_Helipad", {
     -- DCS scripting API limitation: getDesc().life == 0 whether the mod is installed or not.
     -- probeSkip suppresses the false NOT FOUND alarm from CTLDModValidator.
     probeSkip            = true,
+})
+
+-- Visual-only under-construction variant of FG_small_Helipad, used during the animation phase.
+-- Ships in the same mod zip as FG_small_Helipad — no additional modUrls entry needed.
+-- category = "Fortifications": coalition.addStaticObject returns a proper handle (unlike "Heliports"
+-- which creates a ghost Airbase in DCS memory). probeSkip suppresses the CTLDModValidator alarm.
+CTLDObjectRegistry.registerIfAbsent("FG_small_Helipad_Under_Construction", {
+    groupType  = "STATIC",
+    namePrefix = "FARP_Helipad_UC",
+    type       = "FG_small_Helipad_Under_Construction",
+    category   = "Fortifications",
+    probeSkip  = true,
+})
+
+-- Stock DCS infrastructure object used as a construction prop during the animation.
+CTLDObjectRegistry.registerIfAbsent("Tower Crane", {
+    groupType  = "STATIC",
+    namePrefix = "TowerCrane",
+    type       = "Tower Crane",
+    category   = "Structures",
+    shape_name = "TowerCrane_01",
 })
 
 CTLDObjectRegistry.registerIfAbsent("Fuel_Truck", {
@@ -141,7 +168,8 @@ metalFarpScene.name         = "Metal FARP"
 metalFarpScene.requiresMod  = "FG_small_Helipad" -- human-readable required-mod label (docs/catalogue)
 -- Non-stock (mod) DCS types this scene spawns. Added to the known set by the design-time
 -- asset hard-gate (datamine ∪ modTypes) so validation still catches typos in every stock type.
-metalFarpScene.modTypes     = { "FG_small_Helipad" }
+-- FG_small_Helipad_Under_Construction ships in the same zip as FG_small_Helipad.
+metalFarpScene.modTypes     = { "FG_small_Helipad", "FG_small_Helipad_Under_Construction" }
 -- Minimum CTLD version providing the plugin-scene machinery (load-position-independent menus,
 -- requiresCtld check). CTLD warns at load if it is older.
 metalFarpScene.requiresCtld = "2.0.0"
@@ -159,15 +187,103 @@ metalFarpScene.crate        = {
 metalFarpScene.steps        = {
 
     -- ----------------------------------------------------------------
-    -- Step 1: FG_small_Helipad heliport (delay=0).
-    -- Spawned 50 m ahead of the trigger unit to avoid overlapping it.
-    -- Saves the spawned airbase name for the warehouse-stocking step.
-    -- critical=true: if the mod is absent the helipad cannot spawn; abort the whole scene
-    -- rather than deploying trucks and a tent with no landing pad.
+    -- Step 1: Fuel truck — right side under tent (t0 + 0 s).
+    -- ----------------------------------------------------------------
+    {
+        polar                    = { distance = 60, angle = 342.5 },
+        delayAfterPreviousStep   = 0,
+        relativeHeadingInDegrees = 90,
+        relativeAltitudeInMeters = 0,
+        registryKey              = "Fuel_Truck",
+    },
+
+    -- ----------------------------------------------------------------
+    -- Step 2: Repair truck — left side under tent (t0 + 0 s).
+    -- ----------------------------------------------------------------
+    {
+        polar                    = { distance = 61, angle = 340.5 },
+        delayAfterPreviousStep   = 0,
+        relativeHeadingInDegrees = 90,
+        relativeAltitudeInMeters = 0,
+        registryKey              = "repare_Truck",
+    },
+
+    -- ----------------------------------------------------------------
+    -- Step 3: Tent — over both trucks (t0 + 0.5 s).
+    -- ----------------------------------------------------------------
+    {
+        polar                    = { distance = 61, angle = 341 },
+        delayAfterPreviousStep   = 0.5,
+        relativeHeadingInDegrees = 90,
+        relativeAltitudeInMeters = 0,
+        registryKey              = "FARP_Tent",
+    },
+
+    -- ----------------------------------------------------------------
+    -- Step 4: Tower Crane — construction prop, ~10 m right of pad
+    -- as seen from the cockpit (t0 + 5.5 s).
+    -- Reference saved in scene._params for later destruction.
+    -- ----------------------------------------------------------------
+    {
+        polar                    = { distance = 59, angle = 20 },
+        delayAfterPreviousStep   = 5,
+        relativeHeadingInDegrees = 0,
+        relativeAltitudeInMeters = 0,
+        registryKey              = "Tower Crane",
+        func                     = function(ctx)
+            if ctx.spawnedObj then
+                ctx.scene._params._craneObj = ctx.spawnedObj
+            end
+            return true
+        end,
+    },
+
+    -- ----------------------------------------------------------------
+    -- Step 5: FG_small_Helipad_Under_Construction — visual construction
+    -- phase, same footprint as the final pad (t0 + 10.5 s).
+    -- Reference saved in scene._params for destruction in step 6.
     -- ----------------------------------------------------------------
     {
         polar                    = { distance = 58, angle = 0 },
-        delayAfterPreviousStep   = 0,
+        delayAfterPreviousStep   = 20,
+        relativeHeadingInDegrees = 0,
+        relativeAltitudeInMeters = 0,
+        registryKey              = "FG_small_Helipad_Under_Construction",
+        func                     = function(ctx)
+            if ctx.spawnedObj then
+                ctx.scene._params._underConstObj = ctx.spawnedObj
+            end
+            return true
+        end,
+    },
+
+    -- ----------------------------------------------------------------
+    -- Step 6: Destroy FG_small_Helipad_Under_Construction — end of
+    -- construction animation (t0 + 25.5 s). delay=0 → helipad spawns
+    -- immediately after this step.
+    -- ----------------------------------------------------------------
+    {
+        delayAfterPreviousStep = 0,
+        func                   = function(ctx)
+            local obj = ctx.scene._params._underConstObj
+            if obj and Object.isExist(obj) then
+                obj:destroy()
+            end
+            ctx.scene._params._underConstObj = nil
+            return true
+        end,
+    },
+
+    -- ----------------------------------------------------------------
+    -- Step 7: FG_small_Helipad heliport — finished pad revealed immediately
+    -- after UC destruction (t0 + 30.5 s).
+    -- critical=true: if the mod is absent the helipad cannot spawn;
+    -- abort the whole scene rather than deploying equipment with no pad.
+    -- Saves the spawned airbase name for the warehouse-stocking step.
+    -- ----------------------------------------------------------------
+    {
+        polar                    = { distance = 58, angle = 0 },
+        delayAfterPreviousStep   = 5,
         relativeHeadingInDegrees = 0,
         relativeAltitudeInMeters = 0,
         registryKey              = "FG_small_Helipad",
@@ -180,62 +296,46 @@ metalFarpScene.steps        = {
     },
 
     -- ----------------------------------------------------------------
-    -- Step 2: Fuel truck — right side under tent (t0 + 5 s).
+    -- Step 8: Destroy Tower Crane — construction prop removed 5 s
+    -- after the finished pad appears (t0 + 30.5 s). delay=0 here because
+    -- the 5 s gap is carried by step 7's delayAfterPreviousStep.
     -- ----------------------------------------------------------------
     {
-        polar                    = { distance = 60, angle = 342.5 },
-        delayAfterPreviousStep   = 5,
-        relativeHeadingInDegrees = 90,
-        relativeAltitudeInMeters = 0,
-        registryKey              = "Fuel_Truck",
+        delayAfterPreviousStep = 0,
+        func                   = function(ctx)
+            local obj = ctx.scene._params._craneObj
+            if obj and Object.isExist(obj) then
+                obj:destroy()
+            end
+            ctx.scene._params._craneObj = nil
+            return true
+        end,
     },
 
     -- ----------------------------------------------------------------
-    -- Step 3: Repair truck — left side under tent (t0 + 5 s).
-    -- ----------------------------------------------------------------
-    {
-        polar                    = { distance = 61, angle = 340.5 },
-        delayAfterPreviousStep   = 0,
-        relativeHeadingInDegrees = 90,
-        relativeAltitudeInMeters = 0,
-        registryKey              = "repare_Truck",
-    },
-
-    -- ----------------------------------------------------------------
-    -- Step 4: Tent — over both trucks (t0 + 5.5 s).
-    -- ----------------------------------------------------------------
-    {
-        polar                    = { distance = 61, angle = 341 },
-        delayAfterPreviousStep   = 0.5,
-        relativeHeadingInDegrees = 90,
-        relativeAltitudeInMeters = 0,
-        registryKey              = "FARP_Tent",
-    },
-
-    -- ----------------------------------------------------------------
-    -- Step 5: Ammo cargo (t0 + 10 s).
+    -- Step 9: Ammo cargo (t0 + 35.5 s).
     -- ----------------------------------------------------------------
     {
         polar                    = { distance = 75, angle = 346 },
-        delayAfterPreviousStep   = 4.5,
+        delayAfterPreviousStep   = 0,
         relativeHeadingInDegrees = 0,
         relativeAltitudeInMeters = 0,
         registryKey              = "ammo_cargo",
     },
 
     -- ----------------------------------------------------------------
-    -- Step 6: M92 light panel at tent height (t0 + 15 s).
+    -- Step 10: M92 light panel at tent height (t0 + 40 s).
     -- ----------------------------------------------------------------
     {
         polar                    = { distance = 75, angle = 355 },
-        delayAfterPreviousStep   = 5,
+        delayAfterPreviousStep   = 4.5,
         relativeHeadingInDegrees = 310,
         relativeAltitudeInMeters = 4,
         registryKey              = "NF-2_LightOn",
     },
 
     -- ----------------------------------------------------------------
-    -- Step 7: Windsock near the light, same timing (t0 + 15 s).
+    -- Step 11: Windsock near the light, same timing (t0 + 40 s).
     -- ----------------------------------------------------------------
     {
         polar                    = { distance = 73, angle = 346 },
@@ -246,7 +346,7 @@ metalFarpScene.steps        = {
     },
 
     -- ----------------------------------------------------------------
-    -- Step 8: Carrier Seaman on the helipad (t0 + 15 s).
+    -- Step 12: Carrier Seaman on the helipad (t0 + 40 s).
     -- ----------------------------------------------------------------
     {
         polar                    = { distance = 67, angle = 2 },
@@ -257,7 +357,7 @@ metalFarpScene.steps        = {
     },
 
     -- ----------------------------------------------------------------
-    -- Step 9: Stock warehouse + completion message (t0 + 20 s).
+    -- Step 13: Stock warehouse + completion message (t0 + 45 s).
     -- Fills all fuel types so aircraft can refuel/rearm at this point.
     -- ----------------------------------------------------------------
     {
